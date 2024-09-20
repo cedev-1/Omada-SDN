@@ -85,9 +85,11 @@ This will download the necessary images, build the container, and start the Omad
 This will build and run the container, making the Omada Controller accessible at the same URLs as with Docker Compose.
 
 ## Configuration
-    The Omada Controller's configuration can be customized through the config/omada.properties file in the repository. This allows you to change ports, data directories, and other settings.
-    Example Configuration (config/omada.properties):
 
+The Omada Controller's configuration can be customized through the config/omada.properties file in the repository. This allows you to change ports, data directories, and other settings.
+Example Configuration (config/omada.properties):
+
+    '''bash
     # HTTP Port
     http.port=8088
 
@@ -105,10 +107,12 @@ This will build and run the container, making the Omada Controller accessible at
 
     # Java Options
     JAVA_OPTS=-Xms512m -Xmx1024m
+    '''
 
-    Edit this file as needed before starting the container.
+Edit this file as needed before starting the container.
 
 ## Usage
+
 
 Starting the container 
 - Using Docker Compose:
@@ -122,6 +126,7 @@ Starting the container
   docker start omada-controller
   ``` 
 
+
 Stopping the container 
 - Using Docker Compose:
 
@@ -134,7 +139,8 @@ Stopping the container
   docker stop omada-controller
   ```
 
-  rebuilding the container 
+
+Rebuilding the container 
 - Using Docker Compose:
 
   ```bash
@@ -146,14 +152,17 @@ Stopping the container
   docker build -t omada-controller .
   ```
 
-# Troubleshooting
-    - Ports are already in use: Make sure ports 8088 and 8043 are not being used by other services on your system.
-    - Data not persistent: Ensure the volumes are correctly mounted. The data directory should persist even after stopping the container.
-    - Controller won't start: Check the logs for detailed error messages:
 
-      ```bash
-      docker logs omada-controller
-      ```
+# Troubleshooting
+- Ports are already in use: Make sure ports 8088 and 8043 are not being used by other services on your system.
+- Data not persistent: Ensure the volumes are correctly mounted. The data directory should persist even after stopping the container.
+- Controller won't start: Check the logs for detailed error messages:
+
+  ```bash
+  docker logs omada-controller
+  ```
+
+  
 # License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.   
