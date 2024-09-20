@@ -43,7 +43,7 @@ The Omada SDN Controller allows you to manage your TP-Link network devices centr
    git clone https://github.com/yourusername/omada-docker.git
    cd omada-docker
 
-2. "Run Docker compose":
+2. **Run Docker compose:**
 
    ```bash
    docker-compose up -d
@@ -120,7 +120,7 @@ Starting the container
   ```bash
   docker-compose start
   ```
-  - Using Docker CLI:
+- Using Docker CLI:
 
   ```bash
   docker start omada-controller
@@ -133,7 +133,7 @@ Stopping the container
   ```bash
   docker-compose stop
   ```
-  - Using Docker CLI:
+- Using Docker CLI:
 
   ```bash
   docker stop omada-controller
@@ -146,7 +146,7 @@ Rebuilding the container
   ```bash
   docker-compose build
   ```
-  - Using Docker CLI:
+- Using Docker CLI:
 
   ```bash
   docker build -t omada-controller .
@@ -162,7 +162,7 @@ Rebuilding the container
   docker logs omada-controller
   ```
 
-  
+
 # License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.   
