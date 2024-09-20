@@ -1,0 +1,6 @@
+# Ignore temporary and unnecessary files
+*.log
+*.tmp
+*.backup
+config/omada.properties
+data/

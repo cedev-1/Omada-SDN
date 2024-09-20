@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:4.4
+    container_name: omada-mongodb
+    volumes:
+      - ./data/mongodb:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: omada
+      MONGO_INITDB_ROOT_PASSWORD: your_password
+    ports:
+      - "27017:27017"
+    restart: unless-stopped
+
+  omada-controller:
+    build: .
+    container_name: omada-controller
+    ports:
+      - "8088:8088"
+      - "8043:8043"
+    volumes:
+      - ./data/omada:/opt/tplink/EAPController/data
+      - ./config:/opt/tplink/EAPController/conf
+    environment:
+      - JAVA_OPTS=-Xms512m -Xmx1024m
+      - MONGODB_HOST=mongodb
+      - MONGODB_PORT=27017
+      - MONGODB_USERNAME=omada
+      - MONGODB_PASSWORD=your_password
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8088"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
