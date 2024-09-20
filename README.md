@@ -74,13 +74,12 @@ This will download the necessary images, build the container, and start the Omad
 3. **Run the Docker Image:**
 
    ```bash
-   docker run -d --name omada-controller \
+docker run -d --name omada-controller \
   -p 8088:8088 \
   -p 8043:8043 \
   -v $(pwd)/data:/opt/tplink/EAPController/data \
   -v $(pwd)/config:/opt/tplink/EAPController/conf \
   omada-controller
-   ```
 
 This will build and run the container, making the Omada Controller accessible at the same URLs as with Docker Compose.
 
