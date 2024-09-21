@@ -1,38 +1,35 @@
 version: '3.8'
 
 services:
-  mongodb:
+  omada-mongodb:
     image: mongo:4.4
-    container_name: omada-mongodb
+    restart: always
     volumes:
-      - ./data/mongodb:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: omada
-      MONGO_INITDB_ROOT_PASSWORD: your_password
+      - mongodb_data:/data/db
     ports:
       - "27017:27017"
-    restart: unless-stopped
 
   omada-controller:
-    build: .
-    container_name: omada-controller
+    image: ubuntu:20.04  # Using a basic Ubuntu image
+    restart: always
+    depends_on:
+      - omada-mongodb
+    volumes:
+      - ./Omada:/opt/tplink/EAPController  # Local directory to store the .deb file
+    environment:
+      - MONGODB_URI=mongodb://omada-mongodb:27017
     ports:
       - "8088:8088"
       - "8043:8043"
-    volumes:
-      - ./data/omada:/opt/tplink/EAPController/data
-      - ./config:/opt/tplink/EAPController/conf
-    environment:
-      - JAVA_OPTS=-Xms512m -Xmx1024m
-      - MONGODB_HOST=mongodb
-      - MONGODB_PORT=27017
-      - MONGODB_USERNAME=omada
-      - MONGODB_PASSWORD=your_password
-    depends_on:
-      - mongodb
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8088"]
-      interval: 1m30s
-      timeout: 10s
-      retries: 3
+    command: >
+      bash -c "
+      apt-get update &&
+      apt-get install -y wget gdebi-core && 
+      wget https://static.tp-link.com/upload/software/2024/202407/20240710/Omada_SDN_Controller_v5.14.26.1_linux_x64.deb &&
+      gdebi -n Omada_SDN_Controller_v5.14.26.1_linux_x64.deb &&
+      rm Omada_SDN_Controller_v5.14.26.1_linux_x64.deb &&
+      java -jar /opt/tplink/EAPController/lib/Omada.jar
+      "
+
+volumes:
+  mongodb_data:
