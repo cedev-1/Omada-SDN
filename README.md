@@ -40,7 +40,7 @@ The Omada SDN Controller allows you to manage your TP-Link network devices centr
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/yourusername/omada-docker.git
+   git clone https://github.com/cedev-1/omada-docker.git
    cd omada-docker
 
 2. **Run Docker compose:**
@@ -61,7 +61,7 @@ This will download the necessary images, build the container, and start the Omad
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/yourusername/omada-docker.git
+   git clone https://github.com/cedev-1/omada-docker.git
    cd omada-docker
    ```
 
